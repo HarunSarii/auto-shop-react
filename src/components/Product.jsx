@@ -19,7 +19,7 @@ const Product = ({ product }) => {
         <div className="card-body">
           <Link to={`/detail/${product.id}`} className="card-link ">
             <p className="card-text text-blue">{`$ ${product.price}`}</p>
-            <p className="card-text text-dark">{`${product.brand}-${product.model}`}</p>
+            <p className="card-text text-dark">{`${product.name}`}</p>
           </Link>
 
           <button

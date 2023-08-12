@@ -32,13 +32,13 @@ const CarDetailPage = () => {
     <div className="container my-4">
       <div className="row">
         <div className="col-md-6">
-          <img src={product.image} alt={product.title} className="img-fluid" />
+          <img src={product.image} alt={product.model} className="img-fluid" />
         </div>
         <div className="col-md-6">
-          <h3 className="mb-3">{product.title}</h3>
-          <p className="text-muted">{product.description}</p>
-          <p className="font-weight-bold">{product.price}₺</p>
-          <button className="btn btn-primary">Add to Cart</button>
+          <h3 className="mb-3">{product.name}</h3>
+          <p className="card-text text-primary">$ {product.price}</p>
+          <button className="btn btn-primary w-100">Add to Cart</button>
+          <p className="text-muted mt-3">{product.description}</p>
         </div>
       </div>
     </div>
