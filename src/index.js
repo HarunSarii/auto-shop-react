@@ -9,10 +9,19 @@ import {
 import App from "./App";
 import CarDetail from "./components/CarDetail";
 import HomePage from "./components/HomePage";
+import Navbar from "./components/Navbar";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />}>
+    <Route
+      path="/"
+      element={
+        <div>
+          <Navbar />
+          <App />
+        </div>
+      }
+    >
       <Route path="/" element={<HomePage />} />
       <Route path="detail/:id" element={<CarDetail />} />
     </Route>
