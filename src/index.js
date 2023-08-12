@@ -7,7 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from "./App";
-import CarDetail from "./components/CarDetail";
+import CarDetailPage from "./components/CarDetailPage";
 import HomePage from "./components/HomePage";
 import Navbar from "./components/Navbar";
 
@@ -23,7 +23,7 @@ const router = createBrowserRouter(
       }
     >
       <Route path="/" element={<HomePage />} />
-      <Route path="detail/:id" element={<CarDetail />} />
+      <Route path="detail/:id" element={<CarDetailPage />} />
     </Route>
   )
 );
