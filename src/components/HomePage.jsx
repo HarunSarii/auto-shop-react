@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Product from "./Product";
+import { fetchProducts } from "../features/slices/ProductSlice";
 import {
   addSelectedBrand,
   removeSelectedBrand,
@@ -15,7 +15,6 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const searchQuery = useSelector((state) => state.search.searchQuery);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState();
   const productsPerPage = 12;
@@ -23,18 +22,15 @@ const HomePage = () => {
   const { selectedBrands, selectedModels, sortBy } = useSelector(
     (state) => state.filter
   );
+  const { products } = useSelector((state) => state.product);
 
   useEffect(() => {
-    axios
-      .get("https://5fc9346b2af77700165ae514.mockapi.io/products")
-      .then((response) => {
-        setProducts(response.data);
-        setFilteredProducts(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching products:", error);
-      });
-  }, []);
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setFilteredProducts(products);
+  }, [products]);
 
   useEffect(() => {
     const newFilteredProducts = products.filter((item) =>
