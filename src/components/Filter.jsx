@@ -30,54 +30,59 @@ const Filter = ({ list, selectedItems, onInput, type }) => {
   }, [searchQuery, list]);
 
   return (
-    <div
-      className="scrollable-filter p-2 my-2 "
-      style={{
-        maxHeight: "200px",
-        overflowY: "auto",
-        maxWidth: "250px",
-        border: "1px solid #ccc",
-        borderRadius: "4px",
-      }}
-    >
-      <div className="flex items-center p-2 bg-gray-100">
-        <div className="input-group ml-3">
-          <div className="input-group-prepend">
-            <span className="input-group-text bg-white">
-              <FaSearch />
-            </span>
+    <div className="mt-2">
+      <p className="card-text mb-0 text-muted text-capitalize">{type}</p>
+      <div
+        className="scrollable-filter p-2 my-2 "
+        style={{
+          maxHeight: "200px",
+          overflowY: "auto",
+          maxWidth: "250px",
+          border: "1px solid #ccc",
+          borderRadius: "4px",
+        }}
+      >
+        {type !== "sort" && (
+          <div className="flex items-center p-2 bg-gray-100">
+            <div className="input-group ml-0">
+              <div className="input-group-prepend">
+                <span className="input-group-text bg-white">
+                  <FaSearch />
+                </span>
+              </div>
+              <input
+                type="text"
+                className="form-control rounded-right"
+                placeholder="Search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
           </div>
-          <input
-            type="text"
-            className="form-control rounded-right"
-            placeholder="Search"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
+        )}
+        {filteredList.map((item) => (
+          <div className="form-check" key={item}>
+            <input
+              type={type === "sort" ? "radio" : "checkbox"}
+              className="form-check-input"
+              id={`${type}-${item}`}
+              checked={
+                type === "checkbox"
+                  ? selectedItems?.includes(item)
+                  : selectedItems?.includes(item)
+              }
+              onChange={
+                type === "checkbox"
+                  ? () => handleCheckboxChange(item)
+                  : () => handleRadioChange(item)
+              }
+            />
+            <label className="form-check-label" htmlFor={`${type}-${item}`}>
+              {type === "sort" ? item : ` ${item}`}
+            </label>
+          </div>
+        ))}
       </div>
-      {filteredList.map((item) => (
-        <div className="form-check" key={item}>
-          <input
-            type={type === "sort" ? "radio" : "checkbox"}
-            className="form-check-input"
-            id={`${type}-${item}`}
-            checked={
-              type === "checkbox"
-                ? selectedItems?.includes(item)
-                : selectedItems?.includes(item)
-            }
-            onChange={
-              type === "checkbox"
-                ? () => handleCheckboxChange(item)
-                : () => handleRadioChange(item)
-            }
-          />
-          <label className="form-check-label" htmlFor={`${type}-${item}`}>
-            {type === "sort" ? item : ` ${item}`}
-          </label>
-        </div>
-      ))}
     </div>
   );
 };

@@ -143,6 +143,17 @@ const HomePage = () => {
       <div className="row">
         <div className="col-lg-3 col-md-4 col-sm-6">
           <Filter
+            list={[
+              "New to Old",
+              "Old to New",
+              "Price High to Low",
+              "Price Low to High",
+            ]}
+            selectedItems={sortBy}
+            onInput={handleSortOptionChange}
+            type="sort"
+          />
+          <Filter
             list={allBrands}
             selectedItems={selectedBrands}
             onInput={handleSelectBrandFilter}
@@ -153,17 +164,6 @@ const HomePage = () => {
             selectedItems={selectedModels}
             onInput={handleSelectModelFilter}
             type="model"
-          />
-          <Filter
-            list={[
-              "New to Old",
-              "Old to New",
-              "Price High to Low",
-              "Price Low to High",
-            ]}
-            selectedItems={sortBy}
-            onInput={handleSortOptionChange}
-            type="sort"
           />
         </div>
 
