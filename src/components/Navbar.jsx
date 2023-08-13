@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  setSearchQuery,
+  clearSearchQuery,
+} from "../features/slices/SearchSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+
+  const handleSearch = (event) => {
+    const newSearchQuery = event.target.value;
+    dispatch(setSearchQuery(newSearchQuery));
+  };
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearSearchQuery());
+    };
+  }, [dispatch]);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container">
@@ -20,7 +38,7 @@ const Navbar = () => {
               type="text"
               className="form-control rounded-right"
               placeholder="Search"
-              onChange={() => {}}
+              onChange={handleSearch}
             />
           </div>
         </div>
