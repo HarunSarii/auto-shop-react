@@ -10,8 +10,8 @@ import { Provider } from "react-redux";
 import { persistor, store } from "./features/store";
 import { PersistGate } from "redux-persist/integration/react";
 import App from "./App";
-import CarDetailPage from "./components/CarDetailPage";
-import HomePage from "./components/HomePage";
+import CarDetailPage from "./pages/CarDetailPage";
+import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
 
 const router = createBrowserRouter(

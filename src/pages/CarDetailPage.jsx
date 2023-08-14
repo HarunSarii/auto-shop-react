@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../features/slices/CartSlice";
-import Cart from "./Cart";
+import Cart from "../components/Cart";
 
 const CarDetailPage = () => {
   const { id } = useParams();

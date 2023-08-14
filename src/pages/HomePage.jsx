@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Product from "./Product";
+import Product from "../components/Product";
 import { fetchProducts } from "../features/slices/ProductSlice";
 import {
   addSelectedBrand,
@@ -9,8 +9,8 @@ import {
   removeSelectedModel,
   setSortBy,
 } from "../features/slices/FilterSlice";
-import Filter from "./Filter";
-import Cart from "./Cart";
+import Filter from "../components/Filter";
+import Cart from "../components/Cart";
 
 const HomePage = () => {
   const dispatch = useDispatch();
