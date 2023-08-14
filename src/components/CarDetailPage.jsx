@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../features/slices/CartSlice";
+import Cart from "./Cart";
 
 const CarDetailPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
   const dispatch = useDispatch();
+  const { cartItems, isCartVisible } = useSelector((state) => state.cart);
 
   useEffect(() => {
     axios
@@ -33,8 +35,14 @@ const CarDetailPage = () => {
   }
 
   return (
-    <div className="container my-4">
-      <div className="row">
+    <div className="container d-flex my-4  w-100">
+      <div
+        className={`row p2 bg-light ${
+          isCartVisible
+            ? "col-lg-8 col-md-8 col-sm-12"
+            : "col-lg-12 col-md-12 col-sm-12"
+        }`}
+      >
         <div className="col-md-6">
           <img src={product.image} alt={product.model} className="img-fluid" />
         </div>
@@ -50,6 +58,11 @@ const CarDetailPage = () => {
           <p className="text-muted mt-3">{product.description}</p>
         </div>
       </div>
+      {isCartVisible && (
+        <div className="col-lg-3 col-md-4 col-sm-12">
+          <Cart cartItems={cartItems} />
+        </div>
+      )}
     </div>
   );
 };

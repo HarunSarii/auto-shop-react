@@ -55,6 +55,7 @@ const Navbar = () => {
         <div className="d-flex align-items-center ml-auto">
           <div
             className="d-flex align-items-center text-white "
+            style={{ cursor: "pointer" }}
             onClick={() => dispatch(toggleCart())}
           >
             <FaShoppingCart />
