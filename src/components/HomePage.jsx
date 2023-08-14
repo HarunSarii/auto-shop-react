@@ -18,6 +18,7 @@ const HomePage = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState();
+  const [currentProducts, setCurrentProducts] = useState([]);
   const productsPerPage = 12;
 
   const { cartItems, isCartVisible } = useSelector((state) => state.cart);
@@ -85,7 +86,7 @@ const HomePage = () => {
       indexOfLastProduct
     );
 
-    setFilteredProducts(currentProducts);
+    setCurrentProducts(currentProducts);
 
     const totalPages = Math.ceil(
       filteredAndSortedProducts.length / productsPerPage
@@ -100,18 +101,21 @@ const HomePage = () => {
     products,
   ]);
 
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
-
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
     }
   };
+
+  useEffect(() => {
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = filteredProducts.slice(
+      indexOfFirstProduct,
+      indexOfLastProduct
+    );
+    setCurrentProducts(currentProducts);
+  }, [currentPage, filteredProducts]);
 
   const allBrands = Array.from(
     new Set(products.map((product) => product.brand))
