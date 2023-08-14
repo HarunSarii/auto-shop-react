@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../features/slices/CartSlice";
 
 const CarDetailPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -35,9 +39,14 @@ const CarDetailPage = () => {
           <img src={product.image} alt={product.model} className="img-fluid" />
         </div>
         <div className="col-md-6">
-          <h3 className="mb-3">{product.name}</h3>
-          <p className="card-text text-primary">$ {product.price}</p>
-          <button className="btn btn-primary w-100">Add to Cart</button>
+          <h3 className="mb-3">{product.name} ₺</h3>
+          <p className="card-text text-primary">{product.price}</p>
+          <button
+            className="btn btn-primary w-100"
+            onClick={() => dispatch(addToCart(product))}
+          >
+            Add to Cart
+          </button>
           <p className="text-muted mt-3">{product.description}</p>
         </div>
       </div>

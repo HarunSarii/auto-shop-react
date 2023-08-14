@@ -10,6 +10,7 @@ import {
   setSortBy,
 } from "../features/slices/FilterSlice";
 import Filter from "./Filter";
+import Cart from "./Cart";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const HomePage = () => {
   const [totalPages, setTotalPages] = useState();
   const productsPerPage = 12;
 
+  const { cartItems, isCartVisible } = useSelector((state) => state.cart);
   const { selectedBrands, selectedModels, sortBy } = useSelector(
     (state) => state.filter
   );
@@ -139,9 +141,15 @@ const HomePage = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container">
       <div className="row">
-        <div className="col-lg-3 col-md-4 col-sm-6">
+        <div
+          className={
+            !isCartVisible
+              ? "col-lg-3 col-md-3 col-sm-6"
+              : "col-lg-2 col-md-3 col-sm-6"
+          }
+        >
           <Filter
             list={[
               "New to Old",
@@ -167,7 +175,13 @@ const HomePage = () => {
           />
         </div>
 
-        <div className="col-lg-9 col-md-8 col-sm-6">
+        <div
+          className={
+            !isCartVisible
+              ? "col-lg-9 col-md-9 col-sm-6"
+              : "col-lg-7 col-md-6 col-sm-6"
+          }
+        >
           <div className="row">
             {currentProducts.map((product) => (
               <Product key={product.id} product={product} />
@@ -219,6 +233,11 @@ const HomePage = () => {
             </ul>
           </nav>
         </div>
+        {isCartVisible && (
+          <div className="col-lg-3 col-md-3 col-sm-6">
+            <Cart cartItems={cartItems} />
+          </div>
+        )}
       </div>
     </div>
   );
