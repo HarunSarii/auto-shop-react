@@ -9,6 +9,7 @@ import productReducer from "./slices/ProductSlice";
 const persistConfig = {
   key: "root",
   storage,
+  blacklist: ["isCartVisible"],
 };
 
 const persistedReducer = persistReducer(persistConfig, cartReducer);
