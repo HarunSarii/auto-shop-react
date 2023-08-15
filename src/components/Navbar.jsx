@@ -23,10 +23,10 @@ const Navbar = () => {
     };
   }, [dispatch]);
 
-  const totalPrice = cartItems.reduce((total, product) => {
+  const totalPrice = cartItems?.reduce((total, product) => {
     return total + parseFloat(product.price) * product.quantity;
   }, 0);
-  const totalQuantity = cartItems.reduce(
+  const totalQuantity = cartItems?.reduce(
     (total, item) => total + item.quantity,
     0
   );
@@ -57,12 +57,16 @@ const Navbar = () => {
             className="d-flex align-items-center text-white "
             style={{ cursor: "pointer" }}
             onClick={() => dispatch(toggleCart())}
+            data-testid="cart-icon"
           >
             <FaShoppingCart />
             <span className="badge badge-danger ml-2">{totalQuantity}</span>
             <span className="ml-2">{totalPrice}₺</span>
           </div>
-          <div className="d-flex align-items-center text-white pl-4">
+          <div
+            className="d-flex align-items-center text-white pl-4"
+            data-testid="user-icon"
+          >
             <FaUser />
             <span className="ml-2">User</span>
           </div>

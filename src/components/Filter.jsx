@@ -60,8 +60,8 @@ const Filter = ({ list, selectedItems, onInput, type }) => {
             </div>
           </div>
         )}
-        {filteredList.map((item) => (
-          <div className="form-check" key={item}>
+        {filteredList.map((item, index) => (
+          <div className="form-check" key={index}>
             <input
               type={type === "sort" ? "radio" : "checkbox"}
               className="form-check-input"

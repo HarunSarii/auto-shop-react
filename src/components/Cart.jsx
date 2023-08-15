@@ -12,7 +12,7 @@ const Cart = ({ cartItems }) => {
     dispatch(removeFromCart(product.id));
   };
 
-  const totalPrice = cartItems.reduce((total, product) => {
+  const totalPrice = cartItems?.reduce((total, product) => {
     return total + parseFloat(product.price) * product.quantity;
   }, 0);
   return (
