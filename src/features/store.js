@@ -21,6 +21,7 @@ export const store = configureStore({
     cart: persistedReducer,
     product: productReducer,
   },
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 export const persistor = persistStore(store);
